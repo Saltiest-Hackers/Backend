@@ -27,17 +27,10 @@ module.exports = {
   },
 
   production: {
-    client: "postgresql",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password"
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run("PRAGMA foreign_keys = ON", done);
-      }
-    },
+    client: "pg",
+    connection:
+      "postgres://ixaeijozhwlhsk:c142d103727c44ea602d9b9ab9850d5d69696f911d118732af4f291a9fb6786c@ec2-52-202-185-87.compute-1.amazonaws.com:5432/dr4jjgr6ti83k",
+
     migrations: {
       tableName: "knex_migrations"
     }
