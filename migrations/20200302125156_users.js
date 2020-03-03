@@ -1,17 +1,34 @@
 exports.up = function(knex) {
-  return knex.schema.createTable("users", users => {
-    users.increments();
+  return knex.schema
+    .createTable("users", users => {
+      users.increments();
 
-    users
-      .string("username", 128)
-      .notNullable()
-      .unique();
-    users.string("password", 128).notNullable();
-  });
+      users
+        .string("username", 128)
+        .notNullable()
+        .unique();
+      users.string("password", 128).notNullable();
+    })
+
+    .createTable("comments", tbl => {
+      tbl.increments();
+      tbl.string("comment").notNullable();
+      tbl
+        .integer("comment_id", 100)
+        .unsigned()
+        .notNullable()
+        .references("id")
+        .inTable("users")
+        .onDelete("RESTRICT")
+        .onUpdate("CASCADE");
+
+      tbl.text("favoriteComments").notNullable();
+      tbl.string("favoritedComment");
+    });
 };
 
-exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists("users");
+exports.down = function(knex) {
+  return knex.schema.dropTableIfExists("users").dropTableIfExists("resources");
 };
 
 // what i'll need ↓
