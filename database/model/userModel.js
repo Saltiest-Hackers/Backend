@@ -4,6 +4,7 @@ const db = require("../dbConfig");
 
 module.exports = {
   add,
+  // removeSavedComment
   find,
   findBy,
   findById
@@ -34,3 +35,9 @@ function findById(id) {
     .where({ id })
     .first();
 }
+
+// function removeSavedComment(id) {
+//   return db("savedcomment")
+//     .where({ id })
+//     .del();
+// }

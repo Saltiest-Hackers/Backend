@@ -45,9 +45,7 @@ router.post("/login", (req, res) => {
           token
         });
       } else {
-        res
-          .status(401)
-          .json({ message: "These credentials are not even close to valid." });
+        res.status(401).json({ message: "These credentials are not valid." });
       }
     })
     .catch(error => {
