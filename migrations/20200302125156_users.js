@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-  return knex.schema.createTable("user", user => {
+  return knex.schema.createTable("users", users => {
     users.increments();
 
     users
@@ -11,7 +11,7 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists("user");
+  return knex.schema.dropTableIfExists("users");
 };
 
 // what i'll need ↓
@@ -29,6 +29,7 @@ exports.down = function(knex, Promise) {
 //   ]
 // }
 
+// what ill need for comment data ↓
 // {
 //     "comments": [
 //       {
