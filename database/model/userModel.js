@@ -1,5 +1,3 @@
-//still working on the actual model for this thing.
-
 const db = require("../dbConfig");
 
 module.exports = {
@@ -23,7 +21,8 @@ function findBy(filter) {
 
 function add(user) {
   return db("users")
-    .insert(user, "id")
+    .insert(user)
+    .returning("id")
     .then(ids => {
       const [id] = ids;
       return findById(id);
