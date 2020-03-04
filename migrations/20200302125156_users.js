@@ -25,18 +25,6 @@ exports.up = function(knex) {
         .notNullable()
         .references("users.id");
     });
-
-  // .createTable("saved_comments", tbl => {
-  //   tbl.increments("id");
-  //   tbl
-  //     .integer("user_id")
-  //     .unsigned()
-  //     .notNullable();
-  //   tbl
-  //     .integer("comment_id")
-  //     .unsigned()
-  //     .notNullable();
-  // });
 };
 
 exports.down = function(knex) {
