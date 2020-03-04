@@ -4,19 +4,20 @@ const db = require("../dbConfig");
 
 module.exports = {
   add,
-  // removeSavedComment
-  find,
+  findAll,
   findBy,
   findById
 };
 
-function find() {
-  return db("users").select("id", "username");
+const userProperties = ["username", "id", "saltiness"];
+
+function findAll() {
+  return db("users").select(userProperties);
 }
 
 function findBy(filter) {
   return db("users")
-    .select("id", "username", "password")
+    .select(userProperties)
     .where(filter);
 }
 
@@ -31,13 +32,7 @@ function add(user) {
 
 function findById(id) {
   return db("users")
-    .select("id", "username")
+    .select(userProperties)
     .where({ id })
     .first();
 }
-
-// function removeSavedComment(id) {
-//   return db("savedcomment")
-//     .where({ id })
-//     .del();
-// }
