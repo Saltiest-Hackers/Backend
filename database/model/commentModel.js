@@ -5,7 +5,8 @@ module.exports = {
   findAll,
   findBy,
   findById,
-  removeSavedComment
+  removeSavedComment,
+  updateComment
 };
 
 const commentProperties = ["author", "comment_text", "id", "saltiness", "time"];
@@ -37,4 +38,11 @@ function removeSavedComment(id) {
   return db("comments")
     .where("id", id)
     .del();
+}
+
+function updateComment(id, changes) {
+  return db("comment")
+    .where({ id })
+    .update(changes)
+    .returning("*");
 }
