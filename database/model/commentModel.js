@@ -42,7 +42,7 @@ function removeSavedComment(id) {
 
 function updateComment(id, changes) {
   return db("comment")
-    .where({ id })
+    .where("id", id)
     .update(changes)
     .returning("*");
 }
