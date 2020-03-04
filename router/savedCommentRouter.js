@@ -1,18 +1,18 @@
 // WIP
-const router = require("express").Router();
-const Favorites = require("../database/model/savedCommentModel");
+// const router = require("express").Router();
+// const Favorites = require("../database/model/savedCommentModel");
 
-router.post("/", (req, res) => {
-  let favorite = req.body;
+// router.post("/", (req, res) => {
+//   let favorite = req.body;
 
-  Favorites.add(favorite)
-    .then(saved => {
-      res.status(201).json(saved);
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-});
+//   Favorites.add(favorite)
+//     .then(saved => {
+//       res.status(201).json(saved);
+//     })
+//     .catch(error => {
+//       res.status(500).json(error);
+//     });
+// });
 
 // save comment by ID, register and login.
 

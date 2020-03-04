@@ -60,4 +60,19 @@ router.delete("/:id", restricted, (req, res) => {
     });
 });
 
+router.put("/:id", restricted, (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+
+  Comments.updateComment(id, body)
+    .then(updated => {
+      res.status(201).json({ updated });
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: "Failed to update the specified comment by ID."
+      });
+    });
+});
+
 module.exports = router;
