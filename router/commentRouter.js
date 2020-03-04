@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Comments = require("../database/model/commentModel");
+const restricted = require("../auth/authenticate-middleware");
 
 router.get("/", (req, res) => {
   const { id } = req.params;
@@ -10,12 +11,26 @@ router.get("/", (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
+        errorMessage: "Failed to GET the all comments."
+      });
+    });
+});
+
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+
+  Comments.findById(id)
+    .then(commentId => {
+      res.status(200).json({ commentId });
+    })
+    .catch(err => {
+      res.status(500).json({
         errorMessage: "Failed to GET the specified Comment by ID."
       });
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", restricted, (req, res) => {
   let comment = req.body;
 
   Comments.add(comment)
@@ -24,6 +39,24 @@ router.post("/", (req, res) => {
     })
     .catch(error => {
       res.status(500).json(error.message);
+    });
+});
+
+router.delete("/:id", restricted, (req, res) => {
+  const { id } = req.params;
+
+  Comments.removeSavedComment(id)
+    .then(deleted => {
+      if (deleted) {
+        res.json({ removed: deleted });
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not find comment with given id" });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to delete comment" });
     });
 });
 
