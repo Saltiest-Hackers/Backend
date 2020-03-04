@@ -69,9 +69,7 @@ router.put("/:id", restricted, (req, res) => {
       res.status(201).json({ updated });
     })
     .catch(err => {
-      res.status(500).json({
-        errorMessage: "Failed to update the specified comment by ID."
-      });
+      res.status(500).json(err.message);
     });
 });
 
