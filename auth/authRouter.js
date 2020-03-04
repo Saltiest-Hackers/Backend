@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const Users = require("../database/model/userModel");
+const Comments = require("../database/model/savedCommentModel");
 
-router.delete("/comment/:id", (req, res) => {
+router.delete("/comments/:id", (req, res) => {
   const { id } = req.params;
 
-  Users.remove(id)
+  Comments.removeSavedComment(id)
     .then(deleted => {
       if (deleted) {
         res.json({ removed: deleted });

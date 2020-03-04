@@ -2,7 +2,6 @@ exports.up = function(knex) {
   return knex.schema
     .createTable("users", users => {
       users.increments("id");
-
       users
         .string("username", 128)
         .notNullable()
@@ -21,26 +20,28 @@ exports.up = function(knex) {
         .integer("time")
         .unsigned()
         .notNullable();
-    })
-
-    .createTable("saved_comments", tbl => {
-      tbl.increments("id");
       tbl
         .integer("user_id")
-        .unsigned()
-        .notNullable();
-      tbl
-        .integer("comment_id")
-        .unsigned()
-        .notNullable();
+        .notNullable()
+        .references("users.id");
     });
+
+  // .createTable("saved_comments", tbl => {
+  //   tbl.increments("id");
+  //   tbl
+  //     .integer("user_id")
+  //     .unsigned()
+  //     .notNullable();
+  //   tbl
+  //     .integer("comment_id")
+  //     .unsigned()
+  //     .notNullable();
+  // });
 };
 
 exports.down = function(knex) {
-  return knex.schema
-    .dropTableIfExists("users")
-    .dropTableIfExists("comments")
-    .dropTableIfExists("saved_comments");
+  return knex.schema.dropTableIfExists("users").dropTableIfExists("comments");
+  // .dropTableIfExists("saved_comments");
 };
 
 // what i'll need ↓

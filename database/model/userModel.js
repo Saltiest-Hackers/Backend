@@ -36,9 +36,3 @@ function findById(id) {
     .where({ id })
     .first();
 }
-
-// function removeSavedComment(id) {
-//   return db("saved_comments")
-//     .where({ id })
-//     .del();
-// }
