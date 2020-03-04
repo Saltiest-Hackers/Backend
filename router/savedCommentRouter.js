@@ -4,8 +4,7 @@ const Favorites = require("../database/model/savedCommentModel");
 
 router.post("/", (req, res) => {
   let favorite = req.body;
-  //  let user = username?
-  // comment.author = user.username
+
   Favorites.add(favorite)
     .then(saved => {
       res.status(201).json(saved);

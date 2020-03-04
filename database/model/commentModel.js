@@ -24,10 +24,6 @@ function add(comment) {
   return db("comments")
     .insert(comment, "id")
     .returning("*");
-  // .then(ids => {
-  //   const [id] = ids;
-  //   return findById(id);
-  // });
 }
 
 function findById(id) {
@@ -38,7 +34,7 @@ function findById(id) {
 }
 
 function removeSavedComment(id) {
-  return db("saved_comments")
-    .where({ id })
+  return db("comments")
+    .where("id", id)
     .del();
 }
