@@ -23,10 +23,11 @@ function findBy(filter) {
 function add(comment) {
   return db("comments")
     .insert(comment, "id")
-    .then(ids => {
-      const [id] = ids;
-      return findById(id);
-    });
+    .returning("*");
+  // .then(ids => {
+  //   const [id] = ids;
+  //   return findById(id);
+  // });
 }
 
 function findById(id) {
