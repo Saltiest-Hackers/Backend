@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("commentbyid/:id", (req, res) => {
   const { id } = req.params;
 
   Comments.findById(id)
