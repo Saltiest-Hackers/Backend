@@ -6,7 +6,8 @@ module.exports = {
   findBy,
   findById,
   removeSavedComment,
-  updateComment
+  updateComment,
+  getCommentById
 };
 
 const commentProperties = ["author", "comment_text", "id", "saltiness", "time"];
@@ -25,6 +26,10 @@ function add(comment) {
   return db("comments")
     .insert(comment, "id")
     .returning("*");
+}
+
+function getCommentById(id) {
+  return db("comments").where("user_id", id);
 }
 
 function findById(id) {

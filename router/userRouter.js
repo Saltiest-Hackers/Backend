@@ -53,4 +53,12 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.get("/", (req, res) => {
+  Users.findAll()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => res.send(err));
+});
+
 module.exports = router;
