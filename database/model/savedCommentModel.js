@@ -1,42 +1,36 @@
-// const db = require("../dbConfig");
+const db = require("../dbConfig");
 
-// module.exports = {
-//   add,
-//   findAll,
-//   findBy,
-//   //   findById,
-//   removeSavedComment
-// };
+module.exports = {
+  add,
+  findAllByUser,
+  findBy,
+  removeSavedComment
+};
 
-// const savedCommentProperties = [
-//   "author",
-//   "comment_text",
-//   "id",
-//   "saltiness",
-//   "time"
-// ];
+function findAllByUser(userId) {
+  return db("comments as c")
+    .join("saved_comments as sc", "sc.comment_id", "c.id")
+    .where({ "sc.user_id": userId })
+    .select("c.author", "c.comment_text", "c.id", "c.saltiness", "c.time");
+}
 
-// function findAll() {
-//   return db("comments").select(savedCommentProperties);
-// }
+function findBy(filter) {
+  return db("saved_comments")
+    .select(savedCommentProperties)
+    .where(filter);
+}
 
-// function findBy(filter) {
-//   return db("comments")
-//     .select(savedCommentProperties)
-//     .where(filter);
-// }
+function add(comment) {
+  return db("saved_comments")
+    .insert(comment, "id")
+    .then(ids => {
+      const [id] = ids;
+      return findById(id);
+    });
+}
 
-// function add(comment) {
-//   return db("comments")
-//     .insert(comment, "id")
-//     .then(ids => {
-//       const [id] = ids;
-//       return findById(id);
-//     });
-// }
-
-// function removeSavedComment(id) {
-//   return db("saved_comments")
-//     .where({ id })
-//     .del();
-// }
+function removeSavedComment(id) {
+  return db("saved_comments")
+    .where({ id })
+    .del();
+}

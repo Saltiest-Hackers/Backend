@@ -32,6 +32,10 @@ router.get("/:id", (req, res) => {
 
 router.post("/", restricted, (req, res) => {
   let comment = req.body;
+  comment.author = req.decodedToken.username;
+  comment.saltiness = 1;
+  comment.time = new Date().getTime();
+  console.log(req.decodedToken);
 
   Comments.add(comment)
     .then(saved => {
@@ -52,7 +56,7 @@ router.delete("/:id", restricted, (req, res) => {
       } else {
         res
           .status(404)
-          .json({ message: "Could not find comment with given id" });
+          .json({ message: "Could not delete comment with given id" });
       }
     })
     .catch(err => {
