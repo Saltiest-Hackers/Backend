@@ -41,5 +41,3 @@ router.delete("/:id", (req, res) => {
 });
 
 module.exports = router;
-
-// save comment by ID, register and login.

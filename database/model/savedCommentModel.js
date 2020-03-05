@@ -1,11 +1,9 @@
 const db = require("../dbConfig");
-const Comments = require("./commentModel");
 
 module.exports = {
   add,
   findAllByUser,
   findBy,
-  // findById,
   removeSavedComment
 };
 

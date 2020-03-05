@@ -44,31 +44,3 @@ exports.down = function(knex) {
     .dropTableIfExists("comments")
     .dropTableIfExists("saved_comments");
 };
-
-// what i'll need ↓
-
-// {
-//   "user": [
-//     {
-//       "uuid": "<uuid>",
-//       "username": "<username>",
-//       "saltiness_score": "<salty_score>",
-//       "saltiness_rank": "<salty_rank>",
-//       "percent_salty": "<pct_salty>",
-//       "total_comments": "<total_comments>"
-//     }
-//   ]
-// }
-
-// what ill need for comment data ↓
-// {
-//     "comments": [
-//       {
-//         "uuid": "<uuid>",
-//         "c_id": "<cid>",
-//         "text": "<text>",
-//         "saltiness_score": "<salty_score>",
-//         "timestamp": "<timestamp>"
-//       }
-//     ]
-//   }
