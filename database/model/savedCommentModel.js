@@ -4,7 +4,8 @@ module.exports = {
   add,
   findAllByUser,
   findBy,
-  removeSavedComment
+  removeSavedComment,
+  getSavedCommentById
 };
 
 function findAllByUser(userId) {
@@ -18,6 +19,10 @@ function findBy(filter) {
   return db("saved_comments")
     .select(savedCommentProperties)
     .where(filter);
+}
+
+function getSavedCommentById(id) {
+  return db("comments").where("user_id", id);
 }
 
 function add(comment) {

@@ -9,7 +9,19 @@ router.get("/", (req, res) => {
     .then(comment => {
       res.status(200).json({ comment });
     })
-    .catch(err => {
+    .catch(error => {
+      res.status(500).json(error.message);
+    });
+});
+
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+
+  Comments.getCommentById(id)
+    .then(comment => {
+      res.status(200).json({ comment });
+    })
+    .catch(error => {
       res.status(500).json({
         errorMessage: "Failed to GET the all comments."
       });
