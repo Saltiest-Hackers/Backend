@@ -5,12 +5,16 @@ const restricted = require("../auth/authenticate-middleware");
 router.get("/", restricted, (req, res) => {
   const user = req.decodedToken;
   console.log(user);
-  Favorites.findAllByUser(user.subject).then(comments => {
-    res.status(200).json(comments);
-  });
+  Favorites.findAllByUser(user.subject)
+    .then(comments => {
+      res.status(200).json(comments);
+    })
+    .catch(error => {
+      res.status(500).json(error.message);
+    });
 });
 
-router.post("/", (req, res) => {
+router.post("/", restricted, (req, res) => {
   let favorite = req.body;
 
   Favorites.add(favorite)
@@ -22,7 +26,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", restricted, (req, res) => {
   const { id } = req.params;
 
   Favorites.removeSavedComment(id)
