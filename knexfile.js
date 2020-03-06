@@ -11,6 +11,14 @@ module.exports = {
     useNullAsDefault: true
   },
 
+  testing: {
+    client: "sqlite3",
+    connection: {
+      filename: "./testing.sqlite3"
+    },
+    useNullAsDefault: true
+  },
+
   staging: {
     client: "postgresql",
     connection: {
