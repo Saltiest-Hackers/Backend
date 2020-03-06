@@ -17,8 +17,9 @@ function findAllByUser(userId) {
 
 function findBy(filter) {
   return db("saved_comments")
-    .select(savedCommentProperties)
-    .where(filter);
+    .select("user_id", "comment_id")
+    .where(filter)
+    .first();
 }
 
 function getSavedCommentById(id) {

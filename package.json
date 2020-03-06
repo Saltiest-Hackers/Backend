@@ -25,6 +25,9 @@
     "server": "nodemon index.js",
     "test": "jest --watch"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Saltiest-Hackers/Backend.git"
